@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ft_isdigit_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 19:29:34 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 02:50:52 by ldedier          ###   ########.fr       */
+/*   Created: 2019/01/31 22:49:00 by ldedier           #+#    #+#             */
+/*   Updated: 2019/01/31 23:08:39 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "libft.h"
-# include "push_swap.h"
-# include <SDL2/SDL.h>
-# include <SDL2_image/SDL_image.h>
-# include <SDL2_ttf/SDL_ttf.h>
-# include <SDL2_mixer/SDL_mixer.h>
-
-typedef struct		s_checker
+int	ft_isdigit_str(char *str)
 {
-	t_push_swap		ps;
-}					t_checker;
+	int i;
 
-int					parse_instructions(t_checker *checker);
-void				free_all(t_checker *checker);
-#endif
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && (str[i] != '-' || i != 0))
+			return (0);
+		i++;
+	}
+	return (1);
+}

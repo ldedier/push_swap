@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_solved.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 18:21:31 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 03:49:07 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/01 03:02:21 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/01 03:02:57 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int resolve_push_swap(t_push_swap *ps)
+int		is_sorted_pile(t_list *pile)
 {
-	(void)ps;
-	print_push_swap_state(ps);
-	return (0);
+	t_list	*ptr;
+	t_item	*item;
+	t_item	*previous_item;
+
+	ptr = pile;
+	previous_item = NULL;
+	while (ptr != NULL)
+	{
+		item = (t_item *)ptr->content;
+		if (previous_item && previous_item->value > item->value)
+			return (0);
+		previous_item = item;
+		ptr = ptr->next;
+	}
+	return (1);
 }
 
-int	main(int argc, char **argv)
+int		is_solved_push_swap(t_push_swap *ps)
 {
-	t_push_swap ps;
-	int			ret;
-
-	if (argc == 1)
-		return (print_usage(argv[0]));
-	else if (parse_args_ps(argc, argv, &ps))
-		return (1);
-	ret = resolve_push_swap(&ps);
-	free_push_swap(&ps);
-	return (ret);
+	return (ps->pile_b == NULL && is_sorted_pile(ps->pile_a));
 }

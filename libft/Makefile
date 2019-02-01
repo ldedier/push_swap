@@ -6,7 +6,7 @@
 #    By: ldedier <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/06 18:20:16 by ldedier           #+#    #+#              #
-#    Updated: 2019/01/11 21:00:10 by ldedier          ###   ########.fr        #
+#    Updated: 2019/02/01 01:00:47 by ldedier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,14 @@ SRCS_NO_PREFIX = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c\
 	   ft_onesign.c ft_print_line.c ft_strjoin_3.c\
 	   ft_add_to_list_ptr.c ft_add_to_list_ptr_back.c ft_lstdel_ptr.c\
 	   ft_lstpop_ptr.c ft_lstdel_value.c ft_delete_node_ptr.c ft_delete_node.c\
-	   ft_add_to_list_back.c ft_lst_mergesort.c\
+	   ft_add_to_list_back.c ft_lst_mergesort.c ft_lstpop_node.c\
 	   ft_tree_new_ptr.c ft_tree_add_sorted_mul.c ft_tree_add_sorted.c\
 	   ft_tree_del.c ft_tree_del_value.c ft_tree_del_ptr.c ft_free_turn.c\
 	   ft_treelen.c ft_tree_at.c ft_strjoin_free.c ft_strnjoin_free.c\
-	   ft_strichr.c ft_atoll.c ft_round.c ft_strcmp_no_case.c
+	   ft_strichr.c ft_atoll.c ft_round.c ft_strcmp_no_case.c ft_is_atoiable.c\
+	   ft_split_whitespace.c ft_isdigit_str.c ft_isseparator_light.c\
+	   ft_lstpop_node_back.c
+
 
 SOURCES = $(addprefix $(SRCDIR)/, $(SRCS_NO_PREFIX))
 OBJECTS = $(addprefix $(OBJDIR)/, $(SRCS_NO_PREFIX:%.c=%.o))

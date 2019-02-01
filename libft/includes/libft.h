@@ -6,7 +6,7 @@
 /*   By: ldedier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:21:30 by ldedier           #+#    #+#             */
-/*   Updated: 2019/01/17 15:50:22 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 01:01:03 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int					ft_strncmp(char const *s1, char const *s2, size_t n);
 int					ft_atoi(char const *s);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_isdigit_str(char *str);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
@@ -104,6 +105,8 @@ int					ft_isseparator_light(int c);
 void				ft_lstpushback(t_list **alst, t_list *newelem);
 void				*ft_lstpop_ptr(t_list **lst);
 void				ft_lstpop(t_list **lst);
+t_list				*ft_lstpop_node(t_list **lst);
+t_list				*ft_lstpop_node_back(t_list **lst);
 int					ft_lstlength(t_list *list);
 int					ft_add_to_list_ptr(t_list **list, void *content,
 						size_t size);
@@ -157,4 +160,6 @@ int					ft_free_turn(void *to_free, int ret);
 int					ft_is_in_str(const char *str, char c);
 long long int		ft_atoll(const char *str);
 int					ft_round(double value);
+int					ft_is_atoiable(char *str, int *value);
+char				**ft_split_whitespace(char const *s);
 #endif

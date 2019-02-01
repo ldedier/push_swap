@@ -1,23 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu.h                                             :+:      :+:    :+:   */
+/*   ft_lstpop_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 19:29:00 by ldedier           #+#    #+#             */
-/*   Updated: 2019/01/31 19:29:29 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/01 00:12:16 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/01 01:09:57 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VISU_H
-# define VISU_H
+#include "libft.h"
 
-# include "libft.h"
-# include <SDL2/SDL.h>
-# include <SDL2_image/SDL_image.h>
-# include <SDL2_ttf/SDL_ttf.h>
-# include <SDL2_mixer/SDL_mixer.h>
-# include <SDL2_net/SDL_net.h>
+t_list*		ft_lstpop_node_back(t_list **list)
+{
+	t_list	*ptr;
+	t_list	*prev;
 
-#endif
+	ptr = *list;
+	prev = NULL;
+	if (ptr)
+	{
+		while (ptr->next != NULL)
+		{
+			prev = ptr;
+			ptr = ptr->next;
+		}
+		if (prev == NULL)
+		{
+			*list = NULL;
+			return (ptr);
+		}
+		else
+		{
+
+			prev->next = NULL;
+			return (ptr);
+		}
+	}
+	return (NULL);
+}
