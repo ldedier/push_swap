@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:26:41 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 02:42:51 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 05:54:28 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,41 @@ int		log_error(char *str)
 
 void	print_pile(t_list *pile)
 {
-	t_list *ptr;
-	t_item *item;
-	int i;
+	t_list	*ptr;
+	t_item	*item;
+	int		i;
 
-	i = 1;
+	i = 0;
 	ptr = pile;
 	while (ptr != NULL)
 	{
 		item = (t_item *)ptr->content;
-		ft_printf("slot #%d: %d\n", i++, item->value);
+		ft_printf("slot #%d: %d\n", ++i, item->value);
 		ptr = ptr->next;
 	}
-	if (i == 1)
+	if (i == 0)
 		ft_printf("empty !\n");
 }
 
-void	print_push_swap_state(t_push_swap *ps)
+void	print_push_swap_state(t_push_swap *ps, int colored)
 {
-	ft_printf(RED"\nPile A:\n\n");
-	print_pile(ps->pile_a);
-	ft_printf(EOC);
-	ft_printf(BLUE"\nPile B:\n\n");
-	print_pile(ps->pile_b);
-	ft_printf(EOC"\n");
+	if (colored)
+	{
+		ft_printf(RED"\nPile A:\n\n");
+		print_pile(ps->pile_a);
+		ft_printf(EOC);
+		ft_printf(BLUE"\nPile B:\n\n");
+		print_pile(ps->pile_b);
+		ft_printf(EOC"\n");
+	}
+	else
+	{
+		ft_printf("\nPile A:\n\n");
+		print_pile(ps->pile_a);
+		ft_printf("\nPile B:\n\n");
+		print_pile(ps->pile_b);
+		ft_printf("\n");
+	}
 }
 
 int		print_error(void)

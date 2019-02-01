@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:39:06 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 02:39:15 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 05:41:53 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	process_rotate(t_list **pile)
 void	process_reverse_rotate(t_list **pile)
 {
 	t_list *node;
+
 	if ((node = ft_lstpop_node_back(pile)))
 		ft_lstadd(pile, node);
 }

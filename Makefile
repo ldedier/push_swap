@@ -6,7 +6,7 @@
 #    By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 17:02:56 by ldedier           #+#    #+#              #
-#    Updated: 2019/02/01 03:08:30 by ldedier          ###   ########.fr        #
+#    Updated: 2019/02/01 05:44:50 by ldedier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,11 +44,11 @@ OK_COLOR = \x1b[32;01m
 EOC = \033[0m
 
 COMMON_SRCS_NO_PREFIX =		parse_args.c print.c instructions.c is_solved.c\
-							free.c
+							free.c 
 
 SRCS_NO_PREFIX =			main.c
 
-CHECKER_SRCS_NO_PREFIX =	main.c parse_instructions.c
+CHECKER_SRCS_NO_PREFIX =	main.c parse_instructions.c parse_flags.c
 
 INCLUDES_NO_PREFIX = push_swap.h
 CINCLUDES_NO_PREFIX = push_swap.h checker.h

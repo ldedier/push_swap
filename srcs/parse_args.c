@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:12:39 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 03:54:03 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 05:53:49 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,16 @@ int		add_item_to_ps(char *str, t_push_swap *ps)
 	t_item		*item;
 
 	if (!ft_isdigit_str(str))
-	{
-	//	ft_dprintf(2, "%s: invalid value\n", str);
 		return (print_error());
-	}
 	if (!ft_is_atoiable(str, &value))
-	{
-	//	ft_printf("%s: value out of range\n", str);
 		return (print_error());
-	}
 	if ((item = get_item(ps->pile_a, value)))
-	{
-//		ft_printf("value %d already set (in rank %d)\n", value, item->index);
 		return (print_error());
-	}
 	if (!(new = new_item(value, index++)))
 		return (log_error("internal malloc error"));
 	if (ft_add_to_list_ptr_back(&ps->pile_a, new, sizeof(t_item)))
 		return (log_error("internal malloc error"));
+	ps->nb_values++;
 	return (0);
 }
 
@@ -89,13 +81,16 @@ int		parse_arg_ps(char *str, t_push_swap *ps)
 	return (0);
 }
 
-int		parse_args_ps(int argc, char **argv, t_push_swap *ps)
+int		parse_args_ps(int i, int argc, char **argv, t_push_swap *ps)
 {
-	int i;
-
 	ps->pile_a = NULL;
 	ps->pile_b = NULL;
-	i = 1;
+	ps->nb_values = 0;
+	if (i >= argc)
+	{
+		print_error();
+		return (1);
+	}
 	while (i < argc)
 	{
 		if (parse_arg_ps(argv[i], ps))

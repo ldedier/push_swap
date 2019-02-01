@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:22:12 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 03:08:10 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 05:37:58 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ typedef struct		s_push_swap
 {
 	t_list			*pile_a;
 	t_list			*pile_b;
+	int				nb_values;
 }					t_push_swap;
 
 
 int		log_error(char *str);
 int		print_usage(char *progname);
 void	print_pile(t_list *pile);
-void	print_push_swap_state(t_push_swap *ps);
+void	print_push_swap_state(t_push_swap *ps, int colored);
 int		print_error(void);
-int		parse_args_ps(int argc, char **argv, t_push_swap *ps);
+int		parse_args_ps(int start, int argc, char **argv, t_push_swap *ps);
 void	process_swap(t_list *pile);
 void	process_push(t_list **receiver, t_list **giver);
 void	process_rotate(t_list **pile);

@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:48:36 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 03:48:32 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 05:42:38 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		parse_instructions(t_checker *checker)
 	int			ret;
 	char		*line;
 
+	checker->nb_instructions = 0;
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (parse_instruction(line, &checker->ps))
@@ -75,6 +76,9 @@ int		parse_instructions(t_checker *checker)
 			free_all(checker);
 			return (1);
 		}
+		if (checker->verbosed)
+			print_push_swap_state(&(checker->ps), checker->colored);
+		checker->nb_instructions++;
 		free(line);
 	}
 	if (ret == -1)
@@ -85,4 +89,3 @@ int		parse_instructions(t_checker *checker)
 	free(line);
 	return (0);
 }
-
