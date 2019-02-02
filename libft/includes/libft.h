@@ -6,7 +6,7 @@
 /*   By: ldedier <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:21:30 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 01:01:03 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/01 20:57:55 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,4 +162,5 @@ long long int		ft_atoll(const char *str);
 int					ft_round(double value);
 int					ft_is_atoiable(char *str, int *value);
 char				**ft_split_whitespace(char const *s);
+t_list				*ft_lstat(t_list *list, int index);
 #endif
