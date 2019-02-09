@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:22:12 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 05:37:58 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/09 20:11:36 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		print_error(void);
 int		parse_args_ps(int start, int argc, char **argv, t_push_swap *ps);
 void	process_swap(t_list *pile);
 void	process_push(t_list **receiver, t_list **giver);
+int		process_instruction(char *instru, t_push_swap *ps, int verbosed);
 void	process_rotate(t_list **pile);
 void	process_reverse_rotate(t_list **pile);
 int		is_solved_push_swap(t_push_swap *ps);

@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:21:31 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 21:47:26 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/09 22:41:27 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,76 @@ int		get_pivot_index(t_list *list, int start, int end)
 	return ((start + end) / 2);
 }
 
+int		get_value_index(t_list *pile, int value)
+{
+	int		i;
+	t_list	*ptr;
+
+	ptr = pile;
+	i = 0;
+	while (ptr != NULL)
+	{
+		if (((t_item *)(ptr->content))->value == value)
+			return (i);
+		ptr = ptr->next;
+		i++;
+	}
+	return (-1);
+}
+
 int		partition(t_push_swap *ps, int start, int end)
 {
+	int		pivot;
+	int		i;
+	t_list	*ptr;
 
+
+//	ft_printf("start: %d\n", start);
+//	ft_printf("end: %d\n", end);
+	i = 0;
+	while (i++ < start)
+	{
+//		ft_printf("WOOLIT %d\n", start);
+		process_instruction("ra", ps, 1);
+	}
+//	print_push_swap_state(ps, 1);
+	i = -1;
+	while (++i < end - start + 1)
+		process_instruction("pb", ps, 1);
+//	print_push_swap_state(ps, 1);
+	ptr = ft_lstat(ps->pile_b, i - 1);
+	pivot = ((t_item *)(ptr->content))->value;
+	while (i--)
+	{
+		ptr = ps->pile_b;
+		if (((t_item *)(ptr->content))->value > pivot)
+			process_instruction("pa", ps, 1);
+		else if (((t_item *)(ptr->content))->value < pivot)
+			process_instruction("rb", ps, 1);
+	}
+//	ft_printf("PIVOT: %d\n", pivot);
+//	print_push_swap_state(ps, 1);
+	while (ps->pile_b)
+		process_instruction("pa", ps, 1);
+//	print_push_swap_state(ps, 1);
+	i = 0;
+	while (i++ < start)
+		process_instruction("rra", ps, 1);
+//	print_push_swap_state(ps, 1);
+//	ft_printf(GREEN"SORTED AROUND %d\n"EOC, pivot);
+	return (get_value_index(ps->pile_a, pivot));
 }
 
 int		quick_sort_ps(t_push_swap *ps, int start, int end)
 {
-	(void)ps;
-	t_list	*ptr;
-	int		val_start;
-	int		val_end;
-	int		pivot;
-	ft_printf("%d\n", start);
-	ft_printf("%d\n", end);
-	ptr = ft_lstat(ps->pile_a, start);
-	val_start = ((t_item *)(ptr->content))->value;
-	ptr = ft_lstat(ps->pile_a, end);
-	val_end = ((t_item *)(ptr->content))->value;	
-	ft_printf("valstart: %d\n", val_start);
-	ft_printf("valend: %d\n", val_end);
-	if (val_start > val_end)
+	int pivot_index;
+
+	if (start < end)
 	{
-		ft_printf("olalala\n");
-		partition(ps, start, end);
+		pivot_index = partition(ps, start, end);
+//		ft_printf("PIVOT INDEX: %d\n", pivot_index);
+		quick_sort_ps(ps, start, pivot_index - 1);
+		quick_sort_ps(ps, pivot_index + 1, end);
 	}
 	return (0);
 }
