@@ -6,14 +6,14 @@
 #    By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 17:02:56 by ldedier           #+#    #+#              #
-#    Updated: 2019/02/09 20:12:01 by ldedier          ###   ########.fr        #
+#    Updated: 2019/02/10 16:03:29 by ldedier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= push_swap
 CHECKER_NAME	= checker
 
-CC      = gcc -g
+CC      = gcc -g3
 
 PWD = $(shell pwd)
 
