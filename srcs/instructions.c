@@ -6,13 +6,13 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:39:06 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 05:41:53 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/24 17:50:39 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	process_swap(t_list *pile)
+void	process_swap(t_dlist *pile)
 {
 	void *tmp;
 
@@ -24,32 +24,22 @@ void	process_swap(t_list *pile)
 	}
 }
 
-void	process_push(t_list **receiver, t_list **giver)
+void	process_push(t_dlist **receiver, t_dlist **giver)
 {
-	t_list *node;
+	t_dlist *node;
 
-	if ((node = ft_lstpop_node(giver)))
-	{
-		node->next = *receiver;
-		*receiver = node;
-	}
+	if ((node = ft_dlstpop_node(giver)))
+		ft_dlstadd(receiver, node);
 }
 
-void	process_rotate(t_list **pile)
+void	process_rotate(t_dlist **pile)
 {
-	t_list *node;
-
-	if ((node = ft_lstpop_node(pile)))
-	{
-		ft_lstpushback(pile, node);
-		node->next = NULL;
-	}
+	if (*pile)
+		*pile = (*pile)->next;
 }
 
-void	process_reverse_rotate(t_list **pile)
+void	process_reverse_rotate(t_dlist **pile)
 {
-	t_list *node;
-
-	if ((node = ft_lstpop_node_back(pile)))
-		ft_lstadd(pile, node);
+	if (*pile)
+		*pile = (*pile)->prev;
 }

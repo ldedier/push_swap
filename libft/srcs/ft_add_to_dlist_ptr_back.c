@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_add_to_dlist_ptr_back.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 03:05:48 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/24 17:36:35 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/10 18:49:34 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/10 19:15:00 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	free_push_swap(t_push_swap *ps)
+int		ft_add_to_dlist_ptr_back(t_dlist **list, void *content, size_t size)
 {
-	ft_dlstdel_value(&ps->pile_a);
-	ft_dlstdel_value(&ps->pile_b);
+	t_dlist *node;
+
+	if (!(node = ft_dlstnew_ptr(content, size)))
+		return (1);
+	else
+		ft_dlstpushback(list, node);
+	return (0);
 }

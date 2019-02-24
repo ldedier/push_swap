@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_dlstdel_value.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 03:05:48 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/24 17:36:35 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/24 14:02:46 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/24 14:02:46 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	free_push_swap(t_push_swap *ps)
+void	ft_dlstdel_value(t_dlist **list)
 {
-	ft_dlstdel_value(&ps->pile_a);
-	ft_dlstdel_value(&ps->pile_b);
+	while (*list != NULL)
+		ft_dlstpop(list);
 }

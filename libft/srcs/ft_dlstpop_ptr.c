@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_dlstpop_ptr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 03:05:48 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/24 17:36:35 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/10 21:25:43 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/24 16:57:38 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	free_push_swap(t_push_swap *ps)
+void	*ft_dlstpop_ptr(t_dlist **list)
 {
-	ft_dlstdel_value(&ps->pile_a);
-	ft_dlstdel_value(&ps->pile_b);
+	void    *content;
+	t_dlist *ptr;
+	t_dlist *next;
+
+	if (*list != NULL)
+	{
+		ptr = *list;
+		next = (*list)->next;
+		content = ptr->content;
+		(*list)->prev->next = (*list)->next;
+		(*list)->next->prev = (*list)->prev;
+		free(ptr);
+		if (*list == next)
+			*list = NULL;
+		else
+			*list = next;
+		return (content);
+	}
+	return (NULL);
 }

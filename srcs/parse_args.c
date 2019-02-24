@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:12:39 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 05:53:49 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/24 17:35:13 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,21 @@ t_item	*new_item(int value, int index)
 	return (res);
 }
 
-t_item	*get_item(t_list *pile, int value)
+t_item	*get_item(t_dlist *pile, int value)
 {
-	t_list *ptr;
+	t_dlist *ptr;
 	t_item *item;
+	int		first;
 
+	first = 1;
 	ptr = pile;
-	while (ptr != NULL)
+	while ((ptr != pile && ptr != NULL) || (first && ptr != NULL))
 	{
 		item = (t_item *)ptr->content;
 		if (item->value == value)
 			return (item);
 		ptr = ptr->next;
+		first = 0;
 	}
 	return (NULL);
 }
@@ -54,7 +57,7 @@ int		add_item_to_ps(char *str, t_push_swap *ps)
 		return (print_error());
 	if (!(new = new_item(value, index++)))
 		return (log_error("internal malloc error"));
-	if (ft_add_to_list_ptr_back(&ps->pile_a, new, sizeof(t_item)))
+	if (ft_add_to_dlist_ptr_back(&ps->pile_a, new, sizeof(t_item)))
 		return (log_error("internal malloc error"));
 	ps->nb_values++;
 	return (0);
@@ -95,7 +98,7 @@ int		parse_args_ps(int i, int argc, char **argv, t_push_swap *ps)
 	{
 		if (parse_arg_ps(argv[i], ps))
 		{
-			ft_lstdel_value(&ps->pile_a);
+			ft_dlstdel_value(&ps->pile_a);
 			return (1);
 		}
 		i++;

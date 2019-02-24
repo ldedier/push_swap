@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_dlstlength.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 03:05:48 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/24 17:36:35 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/10 20:23:11 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/10 20:26:31 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	free_push_swap(t_push_swap *ps)
+int		ft_dlstlength(t_dlist *dlist)
 {
-	ft_dlstdel_value(&ps->pile_a);
-	ft_dlstdel_value(&ps->pile_b);
+	int		length;
+	t_dlist	*ptr;
+	int		first;
+
+	ptr = dlist;
+	first = 1;
+	length = 0;
+	while ((ptr != dlist && ptr != NULL) || (first && ptr != NULL))
+	{
+		length++;
+		ptr = ptr->next;
+		first = 0;
+	}
+	return (length);
 }

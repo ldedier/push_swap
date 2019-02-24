@@ -6,21 +6,21 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 03:02:21 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 03:02:57 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/24 17:36:54 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		is_sorted_pile(t_list *pile)
+int		is_sorted_pile(t_dlist *pile)
 {
-	t_list	*ptr;
+	t_dlist	*ptr;
 	t_item	*item;
 	t_item	*previous_item;
 
 	ptr = pile;
 	previous_item = NULL;
-	while (ptr != NULL)
+	while ((ptr != pile && ptr != NULL) || (!previous_item && ptr != NULL))
 	{
 		item = (t_item *)ptr->content;
 		if (previous_item && previous_item->value > item->value)

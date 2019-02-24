@@ -6,19 +6,20 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:21:31 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/10 16:15:14 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/24 17:33:55 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		get_pivot_index(t_list *list, int start, int end)
+/*
+int		get_pivot_index(t_dlist *dlist, int start, int end)
 {
 	(void)list;
 	return ((start + end) / 2);
 }
 
-int		get_value_index(t_list *pile, int value)
+int		get_value_index(t_dlist *pile, int value)
 {
 	int		i;
 	t_list	*ptr;
@@ -122,12 +123,12 @@ int		quick_sort_ps(t_push_swap *ps, int start, int end)
 	}
 	return (0);
 }
-
+*/
 int		resolve_push_swap(t_push_swap *ps)
 {
 	(void)ps;
 //	print_push_swap_state(ps, 1);
-	quick_sort_ps(ps, 0, ps->nb_values - 1);
+//	quick_sort_ps(ps, 0, ps->nb_values - 1);
 	return (0);
 }
 

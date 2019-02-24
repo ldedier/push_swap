@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_dlstpushback.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 03:05:48 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/24 17:36:35 by ldedier          ###   ########.fr       */
+/*   Created: 2019/02/10 18:23:04 by ldedier           #+#    #+#             */
+/*   Updated: 2019/02/10 18:46:30 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	free_push_swap(t_push_swap *ps)
+void	ft_dlstpushback(t_dlist **lst, t_dlist *toadd)
 {
-	ft_dlstdel_value(&ps->pile_a);
-	ft_dlstdel_value(&ps->pile_b);
+	t_dlist *ptr;
+
+	ptr = *lst;
+	if (*lst == NULL)
+		ft_dlstadd(lst, toadd);
+	else
+	{
+		ptr = ptr->prev;
+		ptr->next = toadd;
+		toadd->prev = ptr;
+		toadd->next = *lst;
+		(*lst)->prev = toadd;
+	}
 }

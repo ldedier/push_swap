@@ -6,7 +6,7 @@
 /*   By: ldedier <ldedier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 02:26:41 by ldedier           #+#    #+#             */
-/*   Updated: 2019/02/01 05:54:28 by ldedier          ###   ########.fr       */
+/*   Updated: 2019/02/24 17:37:07 by ldedier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int		log_error(char *str)
 	return (1);
 }
 
-void	print_pile(t_list *pile)
+void	print_pile(t_dlist *pile)
 {
-	t_list	*ptr;
+	t_dlist	*ptr;
 	t_item	*item;
 	int		i;
 
 	i = 0;
 	ptr = pile;
-	while (ptr != NULL)
+	while ((ptr != pile && ptr != NULL) || (!i && ptr != NULL))
 	{
 		item = (t_item *)ptr->content;
 		ft_printf("slot #%d: %d\n", ++i, item->value);
