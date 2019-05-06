@@ -21,14 +21,45 @@
 ##
 ##		third request is for know how many loops are above and below
 
+if [ -z "$1" ]
+then
+	./correc.sh "small"
+	./correc.sh "medium"
+	./correc.sh "big"
+	./correc.sh "huge"
+	exit 1
+elif [ $1 == "small" ]
+then
+	NBR=3
+	TRY=5
+	MED=3
+elif [ $1 == "medium" ]
+then
+	NBR=5
+	TRY=5
+	MED=12
+elif [ $1 == "big" ]
+then
+	NBR=100
+	TRY=5
+	MED=700
+elif [ $1 == "huge" ]
+then
+	NBR=500
+	TRY=5
+	MED=5300
+else
+	echo "$1 is not a supported test"
+	exit 1;
+fi
 
 echo "\x1B[36m";
 echo "\n--- [ ANALYSING PUSH_SWAP] ---";
 echo "\x1B[0m";
 
-read -p "How many values : " NBR
-read -p "How many loop : " TRY
-read -p "Mediane for test : " MED
+#read -p "How many values : " NBR
+#read -p "How many loop : " TRY
+##read -p "Mediane for test : " MED
 ((NBR++))
 MOY=0;
 MAX=-1;

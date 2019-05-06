@@ -84,6 +84,42 @@ int		parse_arg_ps(char *str, t_push_swap *ps)
 	return (0);
 }
 
+void	process_add_ranks(t_dlist *dlist, t_item *item)
+{
+	int		first;
+	t_dlist	*ptr;
+	t_item	*compare;
+
+	ptr = dlist;
+	first = 1;
+	while ((ptr != dlist && ptr != NULL) || (first && ptr != NULL))
+	{
+		compare = (t_item *)ptr->content;
+		if (item->value >= compare->value)
+			item->rank++;
+		ptr = ptr->next;
+		first = 0;
+	}
+}
+
+void	add_ranks(t_dlist *dlist)
+{
+	int first;
+	t_dlist *ptr;
+	t_item *item;
+
+	first = 1;
+	ptr = dlist;
+	while ((ptr != dlist && ptr != NULL) || (first && ptr != NULL))
+	{
+		item = (t_item *)ptr->content;
+		item->rank = 0;
+		process_add_ranks(dlist, item);
+		ptr = ptr->next;
+		first = 0;
+	}
+}
+
 int		parse_args_ps(int i, int argc, char **argv, t_push_swap *ps)
 {
 	ps->pile_a = NULL;
@@ -103,5 +139,6 @@ int		parse_args_ps(int i, int argc, char **argv, t_push_swap *ps)
 		}
 		i++;
 	}
+	add_ranks(ps->pile_a);
 	return (0);
 }

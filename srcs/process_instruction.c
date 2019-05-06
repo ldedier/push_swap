@@ -39,6 +39,7 @@ int		process_instruction(char *raw_instruction, t_push_swap *ps,
 {
 	char *instruction;
 
+//	print_push_swap_state(ps, 1);
 	if (!(instruction = ft_strtrim(raw_instruction)))
 		return (1);
 	if (!ft_strcmp(instruction, "sa"))

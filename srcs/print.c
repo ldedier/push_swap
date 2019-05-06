@@ -35,7 +35,7 @@ void	print_pile(t_dlist *pile)
 	while ((ptr != pile && ptr != NULL) || (!i && ptr != NULL))
 	{
 		item = (t_item *)ptr->content;
-		ft_printf("slot #%d: %d\n", ++i, item->value);
+		ft_printf("slot #%d: %d (#%d)\n", ++i, item->value, item->rank);
 		ptr = ptr->next;
 	}
 	if (i == 0)

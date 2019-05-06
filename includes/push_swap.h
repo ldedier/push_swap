@@ -15,10 +15,18 @@
 
 #include "libft.h"
 
+typedef struct		s_path
+{
+	int				dir;
+	int				has_second;
+	int				second_dir;
+}					t_path;
+
 typedef struct		s_item
 {
 	int				value;
 	int				index;
+	int				rank;
 }					t_item;
 
 typedef struct		s_push_swap

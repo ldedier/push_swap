@@ -12,123 +12,120 @@
 
 #include "push_swap.h"
 
-/*
-int		get_pivot_index(t_dlist *dlist, int start, int end)
+int		process_populate_path(t_item *prev_item,
+			t_item *next_item, int rank, t_path *path)
 {
-	(void)list;
-	return ((start + end) / 2);
-}
-
-int		get_value_index(t_dlist *pile, int value)
-{
-	int		i;
-	t_list	*ptr;
-
-	ptr = pile;
-	i = 0;
-	while (ptr != NULL)
+	if (rank + 1 == prev_item->rank)
 	{
-		if (((t_item *)(ptr->content))->value == value)
-			return (i);
-		ptr = ptr->next;
-		i++;
+		path->has_second = 1;
+		path->second_dir = - path->dir;
 	}
-	return (-1);
-}
-
-int		is_sorted_around_pivot(t_push_swap *ps, int start, int end)
-{
-	t_list	*ptr;
-	int		pivot;
-	int		value;
-	int		i;
-
-	(void)start;
-	(void)end;
-//	ft_printf("%d %d\n", start, end);
-//	ft_printf("%d %d\n", ft_lstlength(ps->pile_a), start);
-	ptr = ft_lstat(ps->pile_a, start);
-	pivot = ((t_item *)(ptr->content))->value;
-	i = start + 1;
-	ptr = ptr->next;
-	while (i <= end)
+	else if (rank + 1 == next_item->rank)
 	{
-		value = ((t_item *)(ptr->content))->value;
-//		ft_printf("%d, %d\n", value, pivot);
-		if (value < pivot)
-			return (0);
-		i++;
-		ptr = ptr->next;
+		path->has_second = 1;
+		path->second_dir = path->dir;
 	}
-	return (1);
-}
-
-int		partition(t_push_swap *ps, int start, int end)
-{
-	int		pivot;
-	int		i;
-	t_list	*ptr;
-
-	if (!is_sorted_around_pivot(ps, start, end))
+	if (rank == prev_item->rank)
 	{
-		//	ft_printf("start: %d\n", start);
-		//	ft_printf("end: %d\n", end);
-		i = 0;
-		while (i++ < start)
-		{
-			//ft_printf("WOOLIT %d\n", start);
-			process_instruction("ra", ps, 1);
-		}
-		//	print_push_swap_state(ps, 1);
-		i = -1;
-		while (++i < end - start + 1)
-			process_instruction("pb", ps, 1);
-		//	print_push_swap_state(ps, 1);
-		ptr = ft_lstat(ps->pile_b, i - 1);
-		pivot = ((t_item *)(ptr->content))->value;
-		while (i--)
-		{
-			ptr = ps->pile_b;
-			if (((t_item *)(ptr->content))->value > pivot)
-				process_instruction("pa", ps, 1);
-			else if (((t_item *)(ptr->content))->value < pivot)
-				process_instruction("rb", ps, 1);
-		}
-//		ft_printf("PIVOT: %d\n", pivot);
-//		print_push_swap_state(ps, 1);
-		while (ps->pile_b)
-			process_instruction("pa", ps, 1);
-	//		print_push_swap_state(ps, 1);
-		i = 0;
-		while (i++ < start)
-			process_instruction("rra", ps, 1);
-	//		print_push_swap_state(ps, 1);
-	//		ft_printf(GREEN"SORTED AROUND %d\n"EOC, pivot);
-		return (get_value_index(ps->pile_a, pivot));
+		path->dir = - path->dir;
+		if (path->has_second && path->second_dir > 0)
+			path->has_second = 0;
+		return (1);
 	}
-	else
-		return (start);
-}
-
-int		quick_sort_ps(t_push_swap *ps, int start, int end)
-{
-	int pivot_index;
-
-	if (start < end)
+	else if (rank == next_item->rank)
 	{
-		pivot_index = partition(ps, start, end);
-//		ft_printf("PIVOT INDEX: %d\n", pivot_index);
-		quick_sort_ps(ps, start, pivot_index - 1);
-		quick_sort_ps(ps, pivot_index + 1, end);
+		if (path->has_second && path->second_dir < 0)
+			path->has_second = 0;
+		return (1);
 	}
 	return (0);
 }
-*/
+
+void	populate_path(t_push_swap *ps, t_dlist *pile, int rank, t_path *path)
+{
+	t_dlist *prev_ptr;
+	t_dlist *next_ptr;
+	int		first;
+
+	prev_ptr = pile;
+	next_ptr = pile;
+	path->has_second = 0;
+	path->dir = 0;
+	while (1)
+	{
+		(void)ps;
+//		if(rank == ((t_item *)(prev_ptr->content))->rank)
+//			ft_printf(BLUE"OUAI"EOC);
+
+//		ft_printf("RANK: %d %d\n", rank, ((t_item *)(prev_ptr->content))->rank);
+		if (process_populate_path((t_item *)prev_ptr->content,
+			(t_item *)next_ptr->content, rank, path))
+			return ;
+		first = 0;
+		prev_ptr = prev_ptr->prev;
+		next_ptr = next_ptr->next;
+		path->dir++;
+	}
+}
+
+void	process_transfert(t_push_swap *ps, int *rank)
+{
+	t_path	path;
+	int		i;
+
+	populate_path(ps,ps->pile_a, *rank, &path);
+	*rank += (path.has_second ? 2 : 1);
+	i = 0;
+	if (path.dir < 0)
+	{
+		if (path.has_second)
+		{
+			while (i > path.second_dir)
+			{
+				process_instruction("rra", ps, 1);
+				i--;
+			}
+			process_instruction("pb", ps, 1);
+		}
+		while (i > path.dir)
+		{
+			process_instruction("rra", ps, 1);
+			i--;
+		}
+		process_instruction("pb", ps, 1);
+	}
+	else
+	{
+		if (path.has_second)
+		{
+			while (i < path.second_dir)
+			{
+				process_instruction("ra", ps, 1);
+				i++;
+			}
+			process_instruction("pb", ps, 1);
+			i++;
+		}
+		while (i < path.dir)
+		{
+			process_instruction("ra", ps, 1);
+			i++;
+		}
+		process_instruction("pb", ps, 1);
+	}
+	if (path.has_second)
+		process_instruction("sb", ps, 1);
+}
+
 int		resolve_push_swap(t_push_swap *ps)
 {
-	(void)ps;
-//	print_push_swap_state(ps, 1);
-//	quick_sort_ps(ps, 0, ps->nb_values - 1);
+	int rank;
+
+	rank = 1;
+	while (ps->pile_a)
+		process_transfert(ps, &rank);
+	while (ps->pile_b)
+		process_instruction("pa", ps, 1);
 	return (0);
 }
 
